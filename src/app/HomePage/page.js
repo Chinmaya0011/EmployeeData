@@ -6,7 +6,8 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Swal from 'sweetalert2';
 import Footer from '../Components/Footer';
 import EmployeeList from '../Components/EmployeeList';
-const page = () => {
+
+const Page = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
 
@@ -37,11 +38,10 @@ const page = () => {
   return (
     <div>
       <Header/>
-     
       <EmployeeList/>
       <Footer/>
     </div>
-  )
+  );
 }
 
-export default page;
+export default Page;

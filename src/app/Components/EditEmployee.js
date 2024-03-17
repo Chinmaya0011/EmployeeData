@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { getFirestore, doc, updateDoc } from 'firebase/firestore';
+import { getFirestore, doc, updateDoc, firestore} from 'firebase/firestore';
 import styles from '../Styles/Edit.module.css'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 

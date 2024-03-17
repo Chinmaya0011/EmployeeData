@@ -1,0 +1,55 @@
+/* Styles/Home.module.css */
+
+/* Home container */
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Add this line */
+  padding: 20px;
+  height: 100vh;
+  text-align: center;
+}
+
+/* Face Recognition button */
+.faceRecognitionButton {
+  margin-bottom: 20px;
+  background-color: #d51010;
+  padding: 5px;
+  border-radius: 5px;
+  
+}
+
+/* Buttons container */
+.buttonsContainer {
+  display: flex;
+}
+
+/* Sign Up button */
+.signUpButton {
+  margin-right: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.signUpButton:hover {
+  background-color: #0056b3;
+}
+
+/* Login button */
+.loginButton {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.loginButton:hover {
+  background-color: #218838;
+}

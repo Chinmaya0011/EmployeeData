@@ -1,0 +1,93 @@
+/* Styles/Login.module.css */
+
+/* Login container */
+.login {
+    height: 100vh;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+  }
+  
+  
+  /* Title */
+  .title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Form */
+  .form {
+    margin-bottom: 20px;
+  }
+  
+  /* Form group */
+  .formGroup {
+    margin-bottom: 15px;
+  }
+  
+  /* Label */
+  .label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  /* Input fields */
+  .input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Toggle password button */
+  .toggleButton {
+    background-color: transparent;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .toggleButton:hover {
+    text-decoration: underline;
+  }
+  
+  /* Submit button */
+  .submitButton {
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submitButton:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Register link */
+  .registerLink {
+    text-align: center;
+  }
+  
+  .registerLink p {
+    margin-bottom: 5px;
+  }
+  
+  .registerLink a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .registerLink a:hover {
+    text-decoration: underline;
+  }
+  

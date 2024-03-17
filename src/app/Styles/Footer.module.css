@@ -1,0 +1,21 @@
+/* Footer.module.css */
+
+.footer {
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .footerItem {  
+ 
+
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .footerItem:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  

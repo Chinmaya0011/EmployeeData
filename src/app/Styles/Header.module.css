@@ -1,0 +1,107 @@
+/* Styles/Header.module.css */
+
+/* Header container */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+}
+
+/* Logo container */
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+/* Heading */
+.heading {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* Navigation container */
+.navContainer {
+  display: flex;
+  align-items: center;
+}
+
+/* Header navigation */
+.headerNav {
+  display: flex;
+  align-items: center;
+}
+
+/* Header list */
+.headerUl {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Header list item */
+.headerLi {
+  margin-left: 10px;
+}
+
+/* Header user picture */
+.headerUserPic {
+  width: 30px; /* Adjust size as needed */
+  height: 30px; /* Adjust size as needed */
+  border-radius: 50%; /* Make it round */
+}
+
+/* Header button */
+.headerButton {
+  background-color: #fff;
+  color: #333;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+/* Style for the navigation container */
+.navContainer {
+  display: flex;
+  align-items: center;
+}
+
+/* Style for the unordered list */
+.headerUl {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style for the list items */
+.headerLi {
+  margin-left: 10px;
+}
+
+/* Style for the "Add Staff" link container */
+.addStaffLink {
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+}
+
+/* Style for the "Add Staff" link */
+.createstaff {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+/* Hover effect for the "Add Staff" link */
+.createstaff:hover {
+  color: #4CAF50;
+}
+
+.headerButton:hover {
+  background-color: #ccc;
+}

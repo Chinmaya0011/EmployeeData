@@ -1,0 +1,71 @@
+.employeeListContainer {
+  margin: 20px;
+  height: auto;
+
+  justify-content: center; /* Center contents horizontally */
+
+}
+
+  .addemployee {
+    font-size: 18px;
+    padding: 10px;
+    background-color: #f2f2f200;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+    text-align: center;
+  }
+  
+  .myh2{
+    text-align: center;
+    align-items: center;
+    font-size: larger;
+  }
+  .employeeTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .tableHeader {
+    background-color: #f2f2f2;
+    color: black;
+  }
+  
+  .tableHeaderCell, .tableCell {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .tableRow:nth-child(even) {
+    background-color: #f2f2f2;
+    color: black;
+  }
+  
+  .image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .editButton, .deleteButton {
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  
+  .editButton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+  }
+  
+  .deleteButton {
+    background-color: #f44336;
+    color: white;
+    border: none;
+  }
+  
+  .editButton:hover, .deleteButton:hover {
+    opacity: 0.8;
+  }
+  

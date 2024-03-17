@@ -1,13 +1,10 @@
-"use client"
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation'; // Import useRouter hook from Next.js
+'use client'
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation'; // Import useRouter from next/router instead of next/navigation
 import Header from '../Components/Header';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { useState } from 'react';
-import { auth } from '../firebase/firebaseconfig'; // Import the auth object from firebase.js
 import Swal from 'sweetalert2';
 import Footer from '../Components/Footer';
-import EmployeeCreate from '../Components/EmployeeCreate';
 import EmployeeList from '../Components/EmployeeList';
 const page = () => {
   const router = useRouter();

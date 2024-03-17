@@ -15,7 +15,7 @@ const Header = () => {
   const router = useRouter();
   const [photoUrl, setPhotoUrl] = useState('');
   const [user, setUser] = useState(null); // State to hold user data
-
+const[userName,setUserName]=useState('');
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -29,6 +29,7 @@ const Header = () => {
             const userData = doc.data();
             if (userData && userData.photoURL) {
               setPhotoUrl(userData.photoURL);
+              setUserName(userData.name)
             }
           });
         } else {
@@ -97,15 +98,19 @@ const Header = () => {
         <div className={style.navContainer}>
           <nav className={style.headerNav}>
             <ul className={style.headerUl}>
-              {user ? (
-                <li className={style.headerLi}>
-                  {photoUrl ? (
-                    <Image src={photoUrl} alt="User Photo" width={100} height={100} className={style.headerUserPic} />
-                  ) : (
-                    <Image src={logo} alt="Company Logo" width={100} height={100} className={style.headerUserPic} />
-                  )}
-                </li>
-              ) : null}
+            {user ? (
+  <li className={style.headerLi}>
+    {photoUrl ? (
+      <div className={style.userContainer}>
+        <Image src={photoUrl} alt="User Photo" width={100} height={100} className={style.headerUserPic} />
+        <span>{userName}</span> {/* Assuming userName is the variable containing the user's name */}
+      </div>
+    ) : (
+      <Image src={logo} alt="Company Logo" width={100} height={100} className={style.headerUserPic} />
+    )}
+  </li>
+) : null}
+
               {user ? (
                 <li className={style.headerLi}>
                   <button className={style.headerButton} onClick={handleLogout}>

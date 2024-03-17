@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Loading from './Loading';
 import { getStorage,storage } from 'firebase/storage';// Add this import statement
 import EditEmployee from './EditEmployee';
+import Image from 'next/image';
 
   function EmployeeList() {
 
@@ -85,7 +86,9 @@ const [selectedEmployee, setSelectedEmployee] = useState(null);
                 {employees.map(employee => (
                   <tr key={employee.id} className={style.tableRow}>
                     <td className={style.tableCell}>
-                      <img src={employee.photoURL} alt={employee.name} className={style.image} />
+
+                    <Image src={employee.photoURL} alt={employee.name} width={100} height={100} className={style.image} />
+
                     </td>
                     <td className={style.tableCell}>{employee.name}</td>
                     <td className={style.tableCell}>{employee.email}</td>

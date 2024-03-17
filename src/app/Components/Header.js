@@ -80,8 +80,7 @@ const Header = () => {
           </Link>}
        
         </div>
-
-        <div className={style.navContainer}>
+{user? <div className={style.navContainer}>
   <ul className={style.headerUl}>
     <li className={style.headerLi}>
       <div className={style.addStaffLink}> {/* Adding class name here */}
@@ -91,7 +90,8 @@ const Header = () => {
       </div>
     </li>
   </ul>
-</div>
+</div>:null}
+       
 
 
         <div className={style.navContainer}>

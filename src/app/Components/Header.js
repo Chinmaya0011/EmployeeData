@@ -1,4 +1,6 @@
-"use client"
+// use client directive (if rendering in Next.js 13+)
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import style from '../Styles/Header.module.css';
@@ -6,8 +8,8 @@ import logo from '../../../public/employee.jpg';
 import { getAuth, signOut } from 'firebase/auth';
 import { auth } from '../firebase/firebaseconfig';
 import Swal from 'sweetalert2';
-import { useRouter } from 'next/navigation'; // Correct import statement
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { useRouter } from 'next/navigation';
+import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 
 import { useState, useEffect } from 'react';
 
@@ -15,21 +17,27 @@ const Header = () => {
   const router = useRouter();
   const [photoUrl, setPhotoUrl] = useState('');
   const [user, setUser] = useState(null); // State to hold user data
-const[userName,setUserName]=useState('');
+  const [userName, setUserName] = useState(''); // Added state for user name
+
   useEffect(() => {
+    // Correctly get the user and fetch profile data
     const fetchUserProfile = async () => {
       try {
-        const user = auth.currentUser;
-        if (user) {
-          setUser(user); // Set the user state if authenticated
+        const currentUser = auth.currentUser; // Use currentUser directly
+        if (currentUser) {
+          setUser(currentUser);
           const db = getFirestore();
-          const usersCollection = collection(db, 'users');
-          const userSnapshot = await getDocs(usersCollection);
-          userSnapshot.forEach((doc) => {
+          const usersCollection = collection(db, 'users'); // Using collection directly
+
+          // Using query for flexibility (optional)
+          const q = query(usersCollection, where('uid', '==', currentUser.uid));
+          const querySnapshot = await getDocs(q);
+
+          querySnapshot.forEach((doc) => {
             const userData = doc.data();
-            if (userData && userData.photoURL) {
+            if (userData) {
               setPhotoUrl(userData.photoURL);
-              setUserName(userData.name)
+              setUserName(userData.name);
             }
           });
         } else {
@@ -37,11 +45,13 @@ const[userName,setUserName]=useState('');
         }
       } catch (error) {
         console.error('Error fetching user profile:', error);
+        // Handle error state here
       }
     };
-    
+
     fetchUserProfile();
   }, []);
+
 
   const handleLogout = async () => {
     try {
@@ -69,48 +79,48 @@ const[userName,setUserName]=useState('');
       });
     }
   };
-
   return (
     <header>
       <div className={style.header}>
         <div className={style.logoContainer}>
-          {user?<Link href={'/HomePage'} className={style.heading}>
-            MyStaff
-          </Link>:<Link href={'/'} className={style.heading}>
-            MyStaff
-          </Link>}
-       
+          {user ? (
+            <Link href={'/HomePage'} className={style.heading}>
+              MyStaff
+            </Link>
+          ) : (
+            <Link href={'/'} className={style.heading}>
+              MyStaff
+            </Link>
+          )}
         </div>
-{user? <div className={style.navContainer}>
-  <ul className={style.headerUl}>
-    <li className={style.headerLi}>
-      <div className={style.addStaffLink}> {/* Adding class name here */}
-        <Link href={'/CreateEmployee'} className={style.createstaff}>
-          Add Staff
-        </Link>
-      </div>
-    </li>
-  </ul>
-</div>:null}
-       
-
-
+        {user && (
+          <div className={style.navContainer}>
+            <ul className={style.headerUl}>
+              <li className={style.headerLi}>
+                <div className={style.addStaffLink}>
+                  <Link href={'/CreateEmployee'} className={style.createstaff}>
+                    Add Staff
+                  </Link>
+                </div>
+              </li>
+            </ul>
+          </div>
+        )}
         <div className={style.navContainer}>
           <nav className={style.headerNav}>
             <ul className={style.headerUl}>
-            {user ? (
-  <li className={style.headerLi}>
-    {photoUrl ? (
-      <div className={style.userContainer}>
-        <Image src={photoUrl} alt="User Photo" width={100} height={100} className={style.headerUserPic} />
-        <span>{userName}</span> {/* Assuming userName is the variable containing the user's name */}
-      </div>
-    ) : (
-      <Image src={logo} alt="Company Logo" width={100} height={100} className={style.headerUserPic} />
-    )}
-  </li>
-) : null}
-
+              {user ? (
+                <li className={style.headerLi}>
+                  {photoUrl ? (
+                    <div className={style.userContainer}>
+                      <Image src={photoUrl} alt="User Photo" width={100} height={100} className={style.headerUserPic} />
+                      <span>{userName}</span>
+                    </div>
+                  ) : (
+                    <Image src={logo} alt="Company Logo" width={100} height={100} className={style.headerUserPic} />
+                  )}
+                </li>
+              ) : null}
               {user ? (
                 <li className={style.headerLi}>
                   <button className={style.headerButton} onClick={handleLogout}>

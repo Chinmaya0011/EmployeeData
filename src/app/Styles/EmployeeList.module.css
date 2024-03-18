@@ -1,5 +1,5 @@
 .employeeListContainer {
-  margin: 20px;
+  margin: 10px;
   height: auto;
 
   justify-content: center; /* Center contents horizontally */
@@ -69,3 +69,23 @@
     opacity: 0.8;
   }
   
+/* For smaller screens */
+@media screen and (max-width: 768px) {
+  .employeeListContainer {
+    width: 100%;
+    margin: 5px;
+  }
+}
+
+/* For even smaller screens */
+@media screen and (max-width: 576px) {
+  .employeeListContainer {
+    width: 100%;
+margin: 5px;  }
+}
+
+/* Managing overflow */
+.employeeListContainer {
+  overflow-x: auto; /* Horizontal overflow */
+  overflow-y: auto; /* Vertical overflow */
+}

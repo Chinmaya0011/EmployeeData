@@ -1,115 +1,106 @@
-/* Styles/Header.module.css */
+/* Header Container */
+.header-container {
+  max-width: 1200px; /* Adjust as needed */
+  margin: 0 auto; /* Center horizontally */
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 
-/* Header container */
-.header {
+/* Header */
+.header-container .bg-gray-900 {
+  background-color: #4a5568; /* Dark gray */
+}
+
+.header-container .text-white {
+  color: #ffffff; /* White */
+}
+
+.header-container .py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.header-container .px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.header-container .flex {
   display: flex;
+}
+
+.header-container .items-center {
+  align-items: center;
+}
+
+.header-container .justify-between {
   justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #333;
-  color: white;
 }
 
-/* Logo container */
-.logoContainer {
-  display: flex;
-  align-items: center;
+/* Logo Link */
+.header-container .text-xl {
+  font-size: 1.25rem; /* 20px */
 }
 
-/* Heading */
-.heading {
-  margin: 0;
-  font-size: 24px;
-}
-
-/* Navigation container */
-.navContainer {
-  display: flex;
-  align-items: center;
-}
-
-/* Header navigation */
-.headerNav {
-  display: flex;
-  align-items: center;
-}
-
-/* Header list */
-.headerUl {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-}
-
-/* Header list item */
-.headerLi {
-  margin-left: 10px;
-}
-
-/* Header user picture */
-.headerUserPic {
-  width: 30px; /* Adjust size as needed */
-  height: 30px; /* Adjust size as needed */
-  border-radius: 50%; /* Make it round */
-}
-
-/* Header button */
-.headerButton {
-  background-color: #fff;
-  color: #333;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-/* Style for the navigation container */
-.navContainer {
-  display: flex;
-  align-items: center;
-}
-
-/* Style for the unordered list */
-.headerUl {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-/* Style for the list items */
-.headerLi {
-  margin-left: 10px;
-}
-
-/* Style for the "Add Staff" link container */
-.addStaffLink {
-  padding: 10px;
-  background-color: #f2f2f2;
-  border-radius: 5px;
-}
-.userContainer {
-  display: flex; /* Display children in a row */
-  align-items: center; /* Align children vertically center */
-}
-
-.userContainer span {
-  margin-left: 8px; /* Add some space between the image and the name */
-}
-
-/* Style for the "Add Staff" link */
-.createstaff {
-  text-decoration: none;
-  color: black;
+.header-container .font-bold {
   font-weight: bold;
 }
 
-/* Hover effect for the "Add Staff" link */
-.createstaff:hover {
-  color: #4CAF50;
+/* Navigation Links */
+.header-container .space-x-4 > li:not(:last-child) {
+  margin-right: 1rem;
 }
 
-.headerButton:hover {
-  background-color: #ccc;
+/* Dropdown */
+.header-container .relative {
+  position: relative;
+}
+
+.header-container .focus\:outline-none:focus {
+  outline: none;
+}
+
+.header-container .rounded-full {
+  border-radius: 9999px; /* Large enough for a circle */
+}
+
+.header-container .cursor-pointer {
+  cursor: pointer;
+}
+
+/* Dropdown Menu */
+.header-container .absolute {
+  position: absolute;
+}
+
+.header-container .top-full {
+  top: 100%;
+}
+
+.header-container .right-0 {
+  right: 0;
+}
+
+.header-container .mt-2 {
+  margin-top: 0.5rem;
+}
+
+.header-container .w-48 {
+  width: 12rem;
+}
+
+.header-container .bg-white {
+  background-color: #ffffff; /* White */
+}
+
+.header-container .border {
+  border-width: 1px;
+}
+
+.header-container .border-gray-200 {
+  border-color: #edf2f7; /* Gray */
+}
+
+.header-container .rounded-lg {
+  border-radius: 0.5rem
 }

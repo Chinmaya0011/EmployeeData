@@ -1,8 +1,10 @@
 import React from 'react'
-
+import AdminDashBoard from '../Components/AdminDashBoard'
 const page = () => {
   return (
-    <div>page</div>
+    <div>
+      <AdminDashBoard/>
+    </div>
   )
 }
 

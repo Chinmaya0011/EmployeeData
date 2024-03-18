@@ -1,13 +1,15 @@
+'use client'
 import React, { useEffect, useState } from 'react';
+import style from '../Styles/EmployeeList.module.css'
 import { getFirestore, collection, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore';
-import style from '../Styles/EmployeeList.module.css';
 import Swal from 'sweetalert2';
 import Link from 'next/link';
 import Image from 'next/image';
-import EditEmployee from './EditEmployee';
+import EditEmployee from '../Components/EditEmployee';
 import { auth } from '../firebase/firebaseconfig';
 import ReactDOM from 'react-dom'; // Import ReactDOM
-
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 function EmployeeList() {
   const [employees, setEmployees] = useState([]);
   const [edit, setEdit] = useState(false);
@@ -26,7 +28,7 @@ function EmployeeList() {
       }
 
       const db = getFirestore();
-      const q = query(collection(db, 'employeeList'), where('userId', '==', currentUser.uid));
+      const q = query(collection(db, 'employeeList'))
       const querySnapshot = await getDocs(q);
       const employeeList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setEmployees(employeeList);
@@ -70,7 +72,9 @@ function EmployeeList() {
   };
 
   return (
+   
     <div className={`${style.eList} ${style.employeeListContainer}`}>
+      
       {employees.length === 0 ? (
         <div className={style.addemployee}>
           <Link href={'/CreateEmployee'} className={style.createstaff}>
@@ -79,7 +83,7 @@ function EmployeeList() {
         </div>
       ) : (
         <>
-          <h2 className={style.myh2}>Employee List</h2>
+          <h2 className={style.myh2}>All Employee</h2>
           <table className={style.employeeTable}>
             <thead className={style.tableHeader}>
               <tr>
@@ -117,9 +121,11 @@ function EmployeeList() {
               ))}
             </tbody>
           </table>
+
         </>
       )}
-    </div>
+    </div>      
+
   );
 }
 

@@ -18,7 +18,11 @@ const Header = () => {
   const [photoUrl, setPhotoUrl] = useState('');
   const [user, setUser] = useState(null); // State to hold user data
   const [userName, setUserName] = useState(''); // Added state for user name
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
   useEffect(() => {
     // Correctly get the user and fetch profile data
     const fetchUserProfile = async () => {
@@ -80,59 +84,69 @@ const Header = () => {
     }
   };
   return (
-    <header>
-      <div className={style.header}>
-        <div className={style.logoContainer}>
-          {user ? (
-            <Link href={'/HomePage'} className={style.heading}>
-              MyStaff
-            </Link>
-          ) : (
-            <Link href={'/'} className={style.heading}>
-              MyStaff
-            </Link>
-          )}
+    <header className="bg-gray-900 text-white py-4 px-8 flex items-center justify-between">
+    <div className="flex items-center">
+      {user ? (
+        <Link href="/HomePage" className="text-xl font-bold mr-4">
+          MyStaff
+        </Link>
+      ) : (
+        <Link href="/" className="text-xl font-bold mr-4">
+          MyStaff
+        </Link>
+      )}
+    
+    </div>
+    <div className="flex justify-center flex-grow">
+      {/* Centered navigation */}
+      <ul className="flex space-x-4">
+      <li>
+          {user && (
+        <div className="mr-4">
+          <Link href="/CreateEmployee" className="text-white hover:text-gray-300">
+            Add Staff
+          </Link>
         </div>
-        {user && (
-          <div className={style.navContainer}>
-            <ul className={style.headerUl}>
-              <li className={style.headerLi}>
-                <div className={style.addStaffLink}>
-                  <Link href={'/CreateEmployee'} className={style.createstaff}>
-                    Add Staff
-                  </Link>
-                </div>
-              </li>
-            </ul>
+      )}
+    </li>
+  
+   
+        {/* Add more navigation links as needed */}
+      </ul>
+    </div>
+    {user && (
+      <div className="relative">
+        <button
+          className="focus:outline-none"
+          onClick={toggleDropdown}
+        >
+          <img
+            src={photoUrl || '/default-user-photo.jpg'} // Use default photo if user photo not available
+            alt="User Photo"
+            className="w-10 h-10 rounded-full cursor-pointer"
+          />
+        </button>
+        {/* Dropdown menu */}
+        {isDropdownOpen && (
+          <div className="absolute top-full right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-md z-10">
+          <div className="px-4 py-3">
+  <p className="text-gray-800 font-medium">{userName}</p>
+  <p className="text-gray-500 text-sm">{user.email}</p> {/* Replace userEmail with the appropriate variable */}
+</div>
+
+            <div className="border-t border-gray-200">
+              <button
+                className="block w-full px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:outline-none"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            </div>
           </div>
         )}
-        <div className={style.navContainer}>
-          <nav className={style.headerNav}>
-            <ul className={style.headerUl}>
-              {user ? (
-                <li className={style.headerLi}>
-                  {photoUrl ? (
-                    <div className={style.userContainer}>
-                      <Image src={photoUrl} alt="User Photo" width={100} height={100} className={style.headerUserPic} />
-                      <span>{userName}</span>
-                    </div>
-                  ) : (
-                    <Image src={logo} alt="Company Logo" width={100} height={100} className={style.headerUserPic} />
-                  )}
-                </li>
-              ) : null}
-              {user ? (
-                <li className={style.headerLi}>
-                  <button className={style.headerButton} onClick={handleLogout}>
-                    Logout
-                  </button>
-                </li>
-              ) : null}
-            </ul>
-          </nav>
-        </div>
       </div>
-    </header>
+    )}
+  </header>
   );
 };
 

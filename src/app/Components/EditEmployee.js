@@ -84,7 +84,6 @@ function EditEmployee({ employee, onClose }) {
     <div>
       <h2>Edit Employee</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
-            <button className={styles.closeForm} onClick={onClose}>X</button>
   <div className={styles.inputGroup}>
           <label className={styles.label}>Name:</label>
           <input type="text" name="name" value={updatedEmployee.name} onChange={handleChange} className={styles.input} />
@@ -122,7 +121,6 @@ function EditEmployee({ employee, onClose }) {
           <input type="file" name="image" onChange={handleChange} className={styles.fileInput} />
         </div>
         <button type="submit" className={styles.submitButton}>Submit</button>
-        <button className={styles.submitButton} onClick={onClose}>X</button>
 
       </form>
     </div>

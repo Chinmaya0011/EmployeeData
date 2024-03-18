@@ -1,16 +1,16 @@
+'use client'
 import React, { useEffect, useState } from 'react';
+import style from '../Styles/EmployeeList.module.css'
 import { getFirestore, collection, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore';
-import style from '../Styles/EmployeeList.module.css';
 import Swal from 'sweetalert2';
 import Link from 'next/link';
 import Image from 'next/image';
-import EditEmployee from './EditEmployee';
+import EditEmployee from '../Components/EditEmployee';
 import { auth } from '../firebase/firebaseconfig';
-import ReactDOM from 'react-dom'; // Import ReactDOM
+import { createRoot } from 'react-dom'; // Import createRoot
 
 function EmployeeList() {
   const [employees, setEmployees] = useState([]);
-  const [edit, setEdit] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ function EmployeeList() {
       }
 
       const db = getFirestore();
-      const q = query(collection(db, 'employeeList'), where('userId', '==', currentUser.uid));
+      const q = query(collection(db, 'employeeList'), where('userId', '==', currentUser.uid)); // Add where clause
       const querySnapshot = await getDocs(q);
       const employeeList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setEmployees(employeeList);
@@ -59,7 +59,7 @@ function EmployeeList() {
       showConfirmButton: false,
       cancelButtonText: 'Close',
       didOpen: () => {
-        ReactDOM.render(<EditEmployee employee={employee} onClose={handleCloseEditEmployee} />, document.getElementById('editEmployeeForm'));
+        createRoot(document.getElementById('editEmployeeForm')).render(<EditEmployee employee={employee} onClose={handleCloseEditEmployee} />);
       },
     });
   };
@@ -79,7 +79,7 @@ function EmployeeList() {
         </div>
       ) : (
         <>
-          <h2 className={style.myh2}>Employee List</h2>
+          <h2 className={style.myh2}>All Employee</h2>
           <table className={style.employeeTable}>
             <thead className={style.tableHeader}>
               <tr>

@@ -7,9 +7,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import EditEmployee from '../Components/EditEmployee';
 import { auth } from '../firebase/firebaseconfig';
-import ReactDOM from 'react-dom'; // Import ReactDOM
+import { createRoot } from 'react-dom'; // Updated import to use createRoot
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
+
 function EmployeeList() {
   const [employees, setEmployees] = useState([]);
   const [edit, setEdit] = useState(false);
@@ -61,7 +62,7 @@ function EmployeeList() {
       showConfirmButton: false,
       cancelButtonText: 'Close',
       didOpen: () => {
-        ReactDOM.render(<EditEmployee employee={employee} onClose={handleCloseEditEmployee} />, document.getElementById('editEmployeeForm'));
+        createRoot(document.getElementById('editEmployeeForm')).render(<EditEmployee employee={employee} onClose={handleCloseEditEmployee} />);
       },
     });
   };

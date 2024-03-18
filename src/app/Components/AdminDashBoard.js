@@ -1,4 +1,3 @@
-'use client'
 import React, { useEffect, useState } from 'react';
 import style from '../Styles/EmployeeList.module.css'
 import { getFirestore, collection, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore';
@@ -13,7 +12,7 @@ import Footer from '../Components/Footer';
 
 function EmployeeList() {
   const [employees, setEmployees] = useState([]);
-  const [edit, setEdit] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedEmployee, setSelectedEmployee] = useState(null);
 
   useEffect(() => {
@@ -72,11 +71,30 @@ function EmployeeList() {
     Swal.close();
   };
 
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // Filter employees based on search query
+  const filteredEmployees = employees.filter(employee =>
+    employee.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-   
     <div className={`${style.eList} ${style.employeeListContainer}`}>
+   
+    <div className={style.serchEmployeesContainer}>
+  <input
+    type="text"
+    placeholder="Chinmaya ......"
+    value={searchQuery}
+    onChange={handleSearch}
+    className={style.serchEmployees}
+  />
+</div>
+
       
-      {employees.length === 0 ? (
+      {filteredEmployees.length === 0 ? (
         <div className={style.addemployee}>
           <Link href={'/CreateEmployee'} className={style.createstaff}>
             Add Staff
@@ -99,7 +117,7 @@ function EmployeeList() {
               </tr>
             </thead>
             <tbody className={style.tableBody}>
-              {employees.map(employee => (
+              {filteredEmployees.map(employee => (
                 <tr key={employee.id} className={style.tableRow}>
                   <td className={style.tableCell}>
                     <Image src={employee.image} alt={employee.name} width={100} height={100} className={style.image} />
@@ -122,11 +140,9 @@ function EmployeeList() {
               ))}
             </tbody>
           </table>
-
         </>
       )}
     </div>      
-
   );
 }
 

@@ -1,9 +1,41 @@
 .employeeListContainer {
   margin: 10px;
   height: auto;
+color: rgb(201, 208, 78);
+text-shadow: 1px 1px #f47f36; /* Add text shadow */
 
-  justify-content: center; /* Center contents horizontally */
+justify-content: center; /* Center contents horizontally */
 
+}
+/* EmployeeList.module.css */
+
+/* EmployeeList.module.css */
+
+.serchEmployeesContainer {
+  display: flex; /* Use flexbox */
+  justify-content: center; /* Center horizontally */
+  margin-bottom: 20px; /* Add margin bottom for spacing */
+}
+
+.serchEmployees {
+  text-align: center;
+  padding: 8px 12px; /* Adjust padding as needed */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 4px; /* Border radius */
+  font-size: 16px; /* Font size */
+  width: 40%; /* Width */
+  box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+.serchEmployees:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: #007bff; /* Change border color on focus */
+}
+
+
+.serchEmployees:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: #007bff; /* Change border color on focus */
 }
 
   .addemployee {

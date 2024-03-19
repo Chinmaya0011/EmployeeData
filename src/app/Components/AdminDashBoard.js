@@ -1,4 +1,4 @@
-"use client
+"use client"
 import React, { useEffect, useState } from 'react';
 import style from '../Styles/EmployeeList.module.css'
 import { getFirestore, collection, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore';

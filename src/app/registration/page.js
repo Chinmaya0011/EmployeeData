@@ -1,13 +1,15 @@
-"use client"
-import React, { useState } from 'react';
+'use client'
+import React, { useEffect, useState } from 'react';
 import Header from '../Components/Header';
 import style from '../Styles/Signup.module.css';
 import Link from 'next/link';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../firebase/firebaseconfig'; // Import the auth object from firebase.js
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../firebase/firebaseconfig';
 import Swal from 'sweetalert2';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { useRouter } from 'next/navigation';
 
 const Page = () => {
   const [formData, setFormData] = useState({
@@ -15,8 +17,21 @@ const Page = () => {
     email: '',
     password: '',
     photo: '',
-    mobileNumber: ''
+    mobileNumber: '',
+    userType: 'company' // Default value for user type
   });
+const router=useRouter()
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is logged in, redirect to homepage
+        router.push('/HomePage');
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -25,7 +40,6 @@ const Page = () => {
       [name]: name === 'photo' ? files[0] : value
     }));
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,8 +65,8 @@ const Page = () => {
         name: formData.name,
         email: formData.email,
         mobileNumber: formData.mobileNumber,
-        photoURL: photoURL // Save the download URL of the photo
-        // Add other user data here if needed
+        photoURL: photoURL,
+        userType: formData.userType // Add userType to Firestore
       });
   
       // Clear form data
@@ -61,7 +75,8 @@ const Page = () => {
         email: '',
         password: '',
         photo: '',
-        mobileNumber: ''
+        mobileNumber: '',
+        userType: 'company' // Reset user type to default
       });
   
       // Show success message
@@ -81,7 +96,6 @@ const Page = () => {
       });
     }
   };
-  
 
   return (
     <div>
@@ -123,14 +137,14 @@ const Page = () => {
         </div>
         <div className={style.formGroup}>
           <label className={style.label}>Upload Photo:</label>
-<input
-  type="file"
-  name="photo"
-  onChange={handleChange}
-  accept="image/*"
-  className={style.input}
-  required
-/>
+          <input
+            type="file"
+            name="photo"
+            onChange={handleChange}
+            accept="image/*"
+            className={style.input}
+            required
+          />
         </div>
         <div className={style.formGroup}>
           <label className={style.label}>Mobile Number:</label>
@@ -142,6 +156,18 @@ const Page = () => {
             className={style.input}
             required
           />
+        </div>
+        <div className={style.formGroup}>
+          <label className={style.label}>User Type:</label>
+          <select
+            name="userType"
+            value={formData.userType}
+            onChange={handleChange}
+            className={style.input}
+          >
+            <option value="company">Company</option>
+            <option value="team">Team</option>
+          </select>
         </div>
         <button type="submit" className={style.submitButton}>Register</button>
         <div className={style.loginLink}>

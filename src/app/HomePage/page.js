@@ -28,7 +28,7 @@ const Page = () => {
         });
       } else {
         // Check if the user's email address is equal to the admin email
-        if (user.email === 'imchinu17@gmail.com') {
+        if (user.userType === 'company') {
           setIsAdmin(true);
         }
         setLoading(false);

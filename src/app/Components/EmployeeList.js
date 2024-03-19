@@ -79,7 +79,7 @@ function EmployeeList() {
         </div>
       ) : (
         <>
-          <h2 className={style.myh2}>All Employee</h2>
+          <h2 className={style.myh2}>My Employee</h2>
           <table className={style.employeeTable}>
             <thead className={style.tableHeader}>
               <tr>

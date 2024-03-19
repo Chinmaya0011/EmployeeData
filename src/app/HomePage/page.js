@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'; // Import useRouter from next/router instead of next/navigation
 import Header from '../Components/Header';
@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import Footer from '../Components/Footer';
 import EmployeeList from '../Components/EmployeeList';
 import AdminDashBoard from '../Components/AdminDashBoard';
+import { getFirestore, collection, getDocs } from 'firebase/firestore'; // Import getDocs from firestore
 
 const Page = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const Page = () => {
 
   useEffect(() => {
     const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (!user) {
         router.push('/Login');
         // Display SweetAlert for redirection
@@ -27,11 +28,27 @@ const Page = () => {
           timer: 2000 // Adjust timer as needed
         });
       } else {
-        // Check if the user's email address is equal to the admin email
-        if (user.userType === 'company') {
-          setIsAdmin(true);
+        try {
+          const db = getFirestore();
+          const q = collection(db, 'users');
+          const querySnapshot = await getDocs(q);
+          const employeeList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+          // Check if any employee has userType set to 'company'
+          const  hasCompanyUser= employeeList.find(employee => employee.userType === 'company');
+          console.log(hasCompanyUser)
+          setIsAdmin(hasCompanyUser);
+        } catch (error) {
+          console.error('Error fetching employee list:', error);
+          // Handle error appropriately
+          Swal.fire({
+            icon: 'error',
+            title: 'Error fetching employee list',
+            text: error.message
+          });
+        } finally {
+          setLoading(false);
         }
-        setLoading(false);
       }
     });
 
@@ -44,10 +61,10 @@ const Page = () => {
 
   return (
     <div>
-      <Header/>
-      {!isAdmin && <EmployeeList/>} {/* Render EmployeeList only if user is not admin */}
-      {isAdmin && <AdminDashBoard/>} {/* Render AdminDashBoard only if user is admin */}
-      <Footer/>
+      <Header />
+      {!isAdmin && <EmployeeList />} {/* Render EmployeeList only if user is not admin */}
+      {isAdmin && <AdminDashBoard />} {/* Render AdminDashBoard only if user is admin */}
+      <Footer />
     </div>
   );
 }

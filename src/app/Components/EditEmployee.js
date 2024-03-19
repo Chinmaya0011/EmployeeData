@@ -62,16 +62,16 @@ function EditEmployee({ employee, onClose }) {
         });
       }
   
-    //   // Update other fields in the Firestore document
-    //   await updateDoc(employeeDoc, {
-    //     name: updatedEmployee.name,
-    //     email: updatedEmployee.email,
-    //     mobile: updatedEmployee.mobile,
-    //     designation: updatedEmployee.designation,
-    //     courses: updatedEmployee.courses,
-    //     gender: updatedEmployee.gender,
-    //     // Add other fields as needed
-    //   });
+      // Update other fields in the Firestore document
+      await updateDoc(employeeDoc, {
+        name: updatedEmployee.name,
+        email: updatedEmployee.email,
+        mobile: updatedEmployee.mobile,
+        designation: updatedEmployee.designation,
+        courses: updatedEmployee.courses,
+        gender: updatedEmployee.gender,
+        // Add other fields as needed
+      });
   
       onClose();
     } catch (error) {

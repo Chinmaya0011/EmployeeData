@@ -1,8 +1,7 @@
 .employeeListContainer {
   margin: 10px;
   height: auto;
-color: rgb(201, 208, 78);
-text-shadow: 1px 1px #f47f36; /* Add text shadow */
+color: rgb(233, 63, 7);
 
 justify-content: center; /* Center contents horizontally */
 
@@ -10,6 +9,13 @@ justify-content: center; /* Center contents horizontally */
 /* EmployeeList.module.css */
 
 /* EmployeeList.module.css */
+.style.swalImage {
+  max-width: 200px;
+  max-height: 200px;
+  display: block;
+  margin: auto;
+  border-radius: 50%; /* Makes the image round */
+}
 
 .serchEmployeesContainer {
   display: flex; /* Use flexbox */
@@ -66,6 +72,7 @@ justify-content: center; /* Center contents horizontally */
   .tableHeaderCell, .tableCell {
     padding: 10px;
     border: 1px solid #ddd;
+    background-color: rgba(177, 128, 38, 0.252);
   }
   
   .tableRow:nth-child(even) {

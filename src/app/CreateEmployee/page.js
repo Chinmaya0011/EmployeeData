@@ -10,6 +10,7 @@ import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 
 const EmployeeCreate = () => {
+  const[createdBy,setCreatedBy]=useState(null)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -59,9 +60,20 @@ const EmployeeCreate = () => {
       try {
         setLoading(true);
         const currentUser = auth.currentUser;
-        
+   
         const db = getFirestore();
         const usersCollection = collection(db, 'employeeList');
+        const usersCollection1 = collection(db, 'users');
+      const querySnapshot1 = await getDocs(query(usersCollection1, where("email", "==", currentUser.email)));
+      let createdByValue = null; // Initialize createdBy variable
+
+      if (!querySnapshot1.empty) {
+        const firstDoc = querySnapshot1.docs[0]; // Get the first document
+        const employeeData = firstDoc.data();
+        createdByValue = employeeData.name; // Set createdBy from the first document
+      } else {
+        console.log('no name');
+      }
         
         // Check if the email already exists
         const querySnapshot = await getDocs(query(usersCollection, where('email', '==', formData.email), where('userId', '==', currentUser.uid)));
@@ -85,7 +97,8 @@ const EmployeeCreate = () => {
   
         await addDoc(usersCollection, {
           ...formDataWithUserId,
-          createDate: serverTimestamp()
+          createDate: serverTimestamp(),
+          createdBy:createdByValue
         });
   
         setFormData({
@@ -95,7 +108,8 @@ const EmployeeCreate = () => {
           designation: '',
           gender: '',
           courses: [],
-          image: null
+          image: null,
+          
         });
   
         Swal.fire({

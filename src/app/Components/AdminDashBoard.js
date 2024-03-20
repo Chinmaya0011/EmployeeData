@@ -157,49 +157,54 @@ function EmployeeList() {
         <>
           <h2 className={style.myh2}>Company All Employee</h2>
           <table className={style.employeeTable}>
-            <thead className={style.tableHeader}>
-              <tr>
-                <th className={style.tableHeaderCell}>Created By</th>
-                <th className={style.tableHeaderCell}>Image</th>
-                <th className={style.tableHeaderCell}>Name</th>
-                <th className={style.tableHeaderCell}>Email</th>
-                <th className={style.tableHeaderCell}>Mobile No</th>
-                <th className={style.tableHeaderCell}>Designation</th>
-                <th className={style.tableHeaderCell}>Course</th>
-                <th className={style.tableHeaderCell}>Create Date</th>
-                <th className={style.tableHeaderCell}>Action</th>
-              </tr>
-            </thead>
-            <tbody className={style.tableBody}>
-              {filteredEmployees.map(employee => (
-                <tr key={employee.id} className={style.tableRow}>
-                  <td className={style.tableCell} title={employee.createdBy}>{getInitials(employee.createdBy)}</td>
-                  <td className={style.tableCell}>
-                    <div onClick={() => handleImageClick(employee.image)}>
-                      <Image src={employee.image} alt={employee.name} width={100} height={100} className={style.image} />
-                    </div>
-                  </td>
-                  <td className={style.tableCell}>{employee.name}</td>
-                  <td className={style.tableCell}>
-                    <a href={`tel:${employee.mobile}`}>{employee.mobile}</a>
-                  </td>
-                  <td className={style.tableCell}>
-                    <a href={`mailto:${employee.email}`}>{employee.email}</a>
-                  </td>
-                  <td className={style.tableCell}>{employee.designation}</td>
-                  <td className={style.tableCell}>
-                    {Array.isArray(employee.courses) ? employee.courses.join(', ') : employee.courses}
-                  </td>
-                  <td className={style.tableCell}>
-                    {employee.createDate ? new Date(employee.createDate.seconds * 1000).toLocaleDateString('de-DE') : ''}
-                  </td>
-                  <td className={style.tableCell}>
-                    <button onClick={() => handleEditEmployee(employee)} className={style.editButton}>Edit</button>
-                    <button onClick={() => handleDeleteEmployee(employee.id)} className={style.deleteButton}>Delete</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+          <thead className={style.tableHeader}>
+  <tr>
+    <th className={style.tableHeaderCell}>Created By</th>
+    <th className={style.tableHeaderCell}>Image</th>
+    <th className={style.tableHeaderCell}>Name</th>
+    <th className={style.tableHeaderCell}>Email</th>
+    <th className={style.tableHeaderCell}>Mobile No</th>
+    <th className={style.tableHeaderCell}>Designation</th>
+    <th className={style.tableHeaderCell}>Course</th>
+    <th className={style.tableHeaderCell}>Create Date</th>
+    <th className={style.tableHeaderCell}>Create Time</th> {/* New column for creation time */}
+    <th className={style.tableHeaderCell}>Action</th>
+  </tr>
+</thead>
+<tbody className={style.tableBody}>
+  {filteredEmployees.map(employee => (
+    <tr key={employee.id} className={style.tableRow}>
+      <td className={style.tableCell} title={employee.createdBy}>{getInitials(employee.createdBy)}</td>
+      <td className={style.tableCell}>
+        <div onClick={() => handleImageClick(employee.image)}>
+          <Image src={employee.image} alt={employee.name} width={100} height={100} className={style.image} />
+        </div>
+      </td>
+      <td className={style.tableCell}>{employee.name}</td>
+      <td className={style.tableCell}>
+        <a href={`tel:${employee.mobile}`}>{employee.mobile}</a>
+      </td>
+      <td className={style.tableCell}>
+        <a href={`mailto:${employee.email}`}>{employee.email}</a>
+      </td>
+      <td className={style.tableCell}>{employee.designation}</td>
+      <td className={style.tableCell}>
+        {Array.isArray(employee.courses) ? employee.courses.join(', ') : employee.courses}
+      </td>
+      <td className={style.tableCell}>
+        {employee.createDate ? new Date(employee.createDate.seconds * 1000).toLocaleDateString('de-DE') : ''}
+      </td>
+      <td className={style.tableCell}>
+        {employee.createDate ? new Date(employee.createDate.seconds * 1000).toLocaleTimeString('de-DE') : ''}
+      </td>
+      <td className={style.tableCell}>
+        <button onClick={() => handleEditEmployee(employee)} className={style.editButton}>Edit</button>
+        <button onClick={() => handleDeleteEmployee(employee.id)} className={style.deleteButton}>Delete</button>
+      </td>
+    </tr>
+  ))}
+</tbody>
+
           </table>
         </>
       )}

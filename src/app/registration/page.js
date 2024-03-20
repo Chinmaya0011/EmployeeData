@@ -18,7 +18,7 @@ const Page = () => {
     password: '',
     photo: '',
     mobileNumber: '',
-    userType: 'company' // Default value for user type
+    userType: 'team' // Default value for user type
   });
 const router=useRouter()
   useEffect(() => {
@@ -164,9 +164,11 @@ const router=useRouter()
             value={formData.userType}
             onChange={handleChange}
             className={style.input}
+            required
           >
-            <option value="company">Company</option>
             <option value="team">Team</option>
+
+            <option value="company">Company</option>
           </select>
         </div>
         <button type="submit" className={style.submitButton}>Register</button>
